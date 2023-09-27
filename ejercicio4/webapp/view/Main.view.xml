@@ -1,0 +1,53 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    controllerName="ejercicio4.controller.Main">
+
+  <SearchField liveChange="onSearch" ></SearchField>
+        <f:Form id="FormChange354"
+            editable="true">
+            <f:title>
+                <core:Title text="{algo>/empresa/nombre}" />
+            </f:title>
+            <f:layout>
+                <f:ResponsiveGridLayout
+                    labelSpanXL="3"
+                    labelSpanL="3"
+                    labelSpanM="3"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="4"
+                    emptySpanL="4"
+                    emptySpanM="4"
+                    emptySpanS="0"
+                    columnsXL="1"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false" />
+            </f:layout>
+            <f:formContainers>
+                <f:FormContainer >
+                    <f:formElements >
+                        <f:FormElement label="Empleados">
+                            <f:fields>
+                                <Input value="{algo>/empresa/informacion/empleados}" id="name" enabled="false"/>
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Contacto">
+                            <f:fields>
+                                <Select id="contact" showSecondaryValues="true" items="{algo>/empresa/contactos}">
+                                    <core:ListItem 
+                                        text="{algo>nombre}"
+                                        additionalText="{algo>telefono}"
+                                    />
+                                </Select>
+                            </f:fields>
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+            </f:formContainers>
+        </f:Form>
+</mvc:View>

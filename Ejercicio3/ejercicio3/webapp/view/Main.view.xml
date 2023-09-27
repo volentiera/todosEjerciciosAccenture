@@ -1,0 +1,58 @@
+<mvc:View
+    controllerName="com.ejercicio3.ejercicio3.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <Table
+            id="infoTable"
+            inset="false"
+            headerText="User Information"
+        >
+            <columns>
+                <Column
+                    hAlign="Center"
+                    vAlign="Middle"
+                >
+                    <Text text="Label" />
+                </Column>
+                <Column
+                    hAlign="Center"
+                    vAlign="Middle"
+                >
+                    <Text text="Value" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="Nombre:" />
+                        <Text text="{inputNameModel>/name}" />
+                    </cells>
+                </ColumnListItem>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="Apellido:" />
+                        <Text text="{inputLastNameModel>/lastName}" />
+                    </cells>
+                </ColumnListItem>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="Email:" />
+                        <Text text="{inputEmailModel>/email}" />
+                    </cells>
+                </ColumnListItem>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="DNI:" />
+                        <Text text="{inputDniModel>/dni}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Page>
+</mvc:View>

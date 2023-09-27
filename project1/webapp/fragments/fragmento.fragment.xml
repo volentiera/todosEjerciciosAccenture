@@ -1,0 +1,9 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog id="idDialog">
+        <content>
+            <IllustratedMessage title="abriste el popup">
+            </IllustratedMessage>
+        </content>
+    </Dialog>
+
+</core:FragmentDefinition>

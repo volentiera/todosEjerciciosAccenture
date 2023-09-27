@@ -1,0 +1,28 @@
+<mvc:View
+    controllerName="ejemploapp.controller.Product"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Table
+        id="idProductsTable"
+        inset="false"
+        items="{ path: 'selectedProductModel>/', sorter: {path: 'ProductName'}}"
+    >
+        <columns>
+            <Column width="12em">
+                <Text text="ProductName" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem type="Active" press="onItemPress" vAlign="Middle">
+                <cells>
+                    <ObjectIdentifier
+                        title="{selectedProductModel>ProductName}"
+                        text="{selectedProductModel>ProductName}"
+                    />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+</mvc:View>

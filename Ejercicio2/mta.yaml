@@ -1,0 +1,57 @@
+_schema-version: "3.2"
+ID: Ejercicio2
+version: 0.0.1
+modules:
+- name: Ejercicio2-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: Ejercicio2-destination-service
+    parameters:
+      content-target: true
+  - name: Ejercicio2_html_repo_host
+    parameters:
+      service-key:
+        name: Ejercicio2_html_repo_host-key
+  - name: uaa_Ejercicio2
+    parameters:
+      service-key:
+        name: uaa_Ejercicio2-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: Ejercicio2_Ejercicio2_html_repo_host
+          ServiceInstanceName: Ejercicio2-html5-app-host-service
+          ServiceKeyName: Ejercicio2_html_repo_host-key
+          sap.cloud.service: Ejercicio2
+        - Authentication: OAuth2UserTokenExchange
+          Name: Ejercicio2_uaa_Ejercicio2
+          ServiceInstanceName: Ejercicio2-xsuaa-service
+          ServiceKeyName: uaa_Ejercicio2-key
+          sap.cloud.service: Ejercicio2
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+resources:
+- name: Ejercicio2-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      version: 1.0.0
+    service: destination
+    service-name: Ejercicio2-destination-service
+    service-plan: lite
+- name: Ejercicio2_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: Ejercicio2-html5-app-host-service
+    service-plan: app-host
+- name: uaa_Ejercicio2
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: Ejercicio2-xsuaa-service
+    service-plan: application

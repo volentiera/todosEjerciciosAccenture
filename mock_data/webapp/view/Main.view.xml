@@ -1,0 +1,37 @@
+<mvc:View controllerName="mockdata.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <Button id="themeButton" press="setDark" icon="{iconModel>/icon}"></Button>
+        <content>
+            <VBox alignItems="Center" justifyContent="Center" class="sapUiContentPadding">
+                <SearchField liveChange="onSearch" width="100%" placeholder="Search Products" class="sapUiLargeMargin"></SearchField>
+                <HBox justifyContent="Center" alignItems="Center" width="70%">
+                    <Table id="idTableProductos" items="{nombreModelo>/Products}" inset="false" class="sapUiResponsiveMargin">
+                        <columns>
+                            <Column>
+                                <Text text="Product ID" />
+                            </Column>
+                            <Column>
+                                <Text text="Name" />
+                            </Column>
+                            <Column>
+                                <Text text="Price" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{nombreModelo>ProductsID}" />
+                                    <Text text="{nombreModelo>Name}" />
+                                    <Text text="{nombreModelo>Price}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </HBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>
+

@@ -1,0 +1,29 @@
+<mvc:View
+    xmlns:f="sap.f"
+    controllerName="flexiblecolumnlayout.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content>
+        <Button text="begin" press="onNavToBegin" />
+        <Button text="mid" press="onNavToMid" />
+        <Button text="end" press="onNavToEnd" />
+            <f:FlexibleColumnLayout id="flexibleColumnLayout" layout="{layoutModel>/layout}">
+                <f:beginColumnPages>
+                    <Text text="begin" />
+                </f:beginColumnPages>
+                <f:midColumnPages>
+                    <Text text="mid" />
+                </f:midColumnPages>
+                <f:midColumnPages>
+                    <Text text="end" />
+                </f:midColumnPages>
+            </f:FlexibleColumnLayout>
+        </content>
+    </Page>
+</mvc:View>

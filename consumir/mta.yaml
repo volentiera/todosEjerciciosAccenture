@@ -1,0 +1,92 @@
+_schema-version: "3.2"
+ID: consumir
+version: 0.0.1
+modules:
+- name: consumir-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: consumir-destination-service
+    parameters:
+      content-target: true
+  - name: consumir_html_repo_host
+    parameters:
+      service-key:
+        name: consumir_html_repo_host-key
+  - name: uaa_consumir
+    parameters:
+      service-key:
+        name: uaa_consumir-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: Ejemplo_consumir_html_repo_host
+          ServiceInstanceName: consumir-html5-app-host-service
+          ServiceKeyName: consumir_html_repo_host-key
+          sap.cloud.service: Ejemplo
+        - Authentication: OAuth2UserTokenExchange
+          Name: Ejemplo_uaa_consumir
+          ServiceInstanceName: consumir-xsuaa-service
+          ServiceKeyName: uaa_consumir-key
+          sap.cloud.service: Ejemplo
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: consumir-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: consumir_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - ejemploapp.zip
+      name: ejemploapp
+      target-path: resources/
+- name: ejemploapp
+  type: html5
+  path: ejemploapp
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: consumir-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: consumir-destination-service
+    service-plan: lite
+- name: consumir_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: consumir-html5-app-host-service
+    service-plan: app-host
+- name: uaa_consumir
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: consumir-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo

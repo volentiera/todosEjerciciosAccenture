@@ -1,0 +1,5 @@
+<mvc:View controllerName="com.app.project1.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Button id="algo" press="algos" text="Hola Mundo" ></Button>
+</mvc:View>

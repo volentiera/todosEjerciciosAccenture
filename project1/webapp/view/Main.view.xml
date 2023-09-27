@@ -1,0 +1,7 @@
+<mvc:View controllerName="project1.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" displayBlock="true"
+    xmlns="sap.m">
+    <Button press="onPress" ></Button>
+    <Button press="navTo" text="ir a vista"></Button>
+    <core:Fragment type="XML" fragmentName="project1.fragments.hola"/>
+</mvc:View>

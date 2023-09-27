@@ -1,0 +1,11 @@
+<mvc:View controllerName="com.ejercicio.ejercicio2.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content />
+        <Input id="input1" value="{input1model>/number1}" type="Number"/>
+        <Input id="input2" value="{input2model>/number2}" type="Number"/>
+        <Button id="button" text="{i18n>add}" press="sumar"></Button>
+        <Input id="resultado" value="{resultModel>/result}" placeholder="Resultado" editable="false" />
+    </Page>
+</mvc:View>

@@ -1,0 +1,33 @@
+<mvc:View
+    controllerName="splitapp.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+            <SplitApp
+                id="mySplitApp"
+                initialDetail="detailPage1"
+            >
+                <masterPages>
+                    <Page>
+                        <Text text="Hola" />
+                    </Page>
+                </masterPages>
+                <detailPages>
+                    <Page id="detailPage1">
+                        <Text text="Chau" />
+                        <Button
+                            text="pagina 2"
+                            press="switchToDetailPage2"
+                        />
+                    </Page>
+                    <Page id="detailPage2">
+                        <Text text="algo" />
+                        <Button
+                            text="volver"
+                            press="switchToDetailPage1"
+                        />
+                    </Page>
+                </detailPages>
+            </SplitApp>
+</mvc:View>

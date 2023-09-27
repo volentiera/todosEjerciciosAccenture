@@ -1,0 +1,106 @@
+_schema-version: "3.2"
+ID: santiapp
+version: 0.0.1
+modules:
+- name: santiapp-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: santiapp-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comappproject1.zip
+      name: comappproject1
+      target-path: resources/
+    - artifacts:
+      - project2.zip
+      name: project2
+      target-path: resources/
+- name: comappproject1
+  type: html5
+  path: project1
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: santiapp-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: santiapp-destination-service
+    parameters:
+      content-target: true
+  - name: santiapp-repo-host
+    parameters:
+      service-key:
+        name: santiapp-repo-host-key
+  - name: uaa_santiapp
+    parameters:
+      service-key:
+        name: uaa_santiapp-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: App_santiapp_repo_host
+          ServiceInstanceName: santiapp-html5-srv
+          ServiceKeyName: santiapp-repo-host-key
+          sap.cloud.service: App
+        - Authentication: OAuth2UserTokenExchange
+          Name: App_uaa_santiapp
+          ServiceInstanceName: santiapp-xsuaa-service
+          ServiceKeyName: uaa_santiapp-key
+          sap.cloud.service: App
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: project2
+  type: html5
+  path: project2
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: santiapp-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: santiapp-html5-srv
+    service-plan: app-host
+- name: santiapp-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: santiapp-destination-service
+    service-plan: lite
+- name: uaa_santiapp
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: santiapp-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo
